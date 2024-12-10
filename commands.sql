@@ -22,10 +22,6 @@ CREATE TABLE user (
     user_type CHAR(1) NOT NULL DEFAULT 'C' -- 'C' for customer, 'A' for admin
 );
 
--- Add a domain constraint for user_type
-ALTER TABLE user
-ADD CONSTRAINT chk_user_type CHECK (user_type IN ('C', 'A'));
-
 -- Create the car table
 CREATE TABLE car (
     car_id INT PRIMARY KEY,
@@ -35,10 +31,6 @@ CREATE TABLE car (
     status VARCHAR(50) NOT NULL,
     office_id INT
 );
-
--- Add a domain constraint for car status
-ALTER TABLE car
-ADD CONSTRAINT chk_car_status CHECK (status IN ('Active', 'Out of Service', 'Rented'));
 
 -- Create the reservation table
 CREATE TABLE reservation (
@@ -75,3 +67,13 @@ REFERENCES car (car_id);
 ALTER TABLE payment
 ADD CONSTRAINT FK_payment_reservation FOREIGN KEY (reservation_id)
 REFERENCES reservation (reservation_id);
+
+-- Add a domain constraint for user_type
+ALTER TABLE user
+ADD CONSTRAINT chk_user_type CHECK (user_type IN ('C', 'A'));
+
+
+-- Add a domain constraint for car status
+ALTER TABLE car
+ADD CONSTRAINT chk_car_status CHECK (status IN ('Active', 'Out of Service', 'Rented'));
+
