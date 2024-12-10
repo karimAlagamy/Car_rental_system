@@ -39,16 +39,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->rollBack();
 
         // Check if the error is a duplicate key violation
-        if ($e->errorInfo[1] == 1062) { // MySQL error code for duplicate entry
+        if ($e->errorInfo[1] == 1062) // MySQL error code for duplicate entry 
+        { 
             echo "<script>
                     alert('Error: Duplicate entry detected (email or username already exists).');
-                    window.location.href = 'registration.html';
+                    window.location.href = '../signup.html';
                   </script>";
         } else {
             // General error handling
             echo "<script>
                     alert('Error: " . $e->getMessage() . "');
-                    window.location.href = 'registration.html';
+                    window.location.href = '../signup.html';
                   </script>";
         }
     }

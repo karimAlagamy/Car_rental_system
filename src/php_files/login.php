@@ -1,47 +1,67 @@
 <?php
 
-$servername = "127.0.0.1"; 
-$username = "root";
-$password = "";
-$dbname = "registration_form";
+require_once "utilities.php";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Connect to the database
+$conn = getDatabaseConnection();
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+try {
+    // Retrieve user input
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("SELECT first_name, password, user_type, username FROM user WHERE email = ?");
 
-// Prepare and bind
-$stmt = $conn->prepare("SELECT name, password FROM user WHERE email = ?");
-$stmt->bind_param("s", $email);
+    // Execute the statement with the parameter
+    $stmt->execute([$email]);
 
-// Execute the statement
-$stmt->execute();
+    // Fetch the result
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Bind result variables
-$stmt->bind_result($username, $hashed_password);
+    if ($result) {
+        // Retrieve values from the result
+        $retrieved_name = $result['first_name'];
+        $retrieved_password = $result['password'];
+        $user_type = $result['user_type'];
+        $username = $result['username'];
 
-// Fetch the result and verify the password
-if ($stmt->fetch()) {
-    if (md5($password) === $hashed_password && $username != "root") {
-        echo "Welcome, " . htmlspecialchars($username) . "!";
+        // Verify the password
+        if ($password === $retrieved_password && $retrieved_name != "root") {
+            // Redirect based on user type
+            if ($user_type === 'C') {
+                echo "<script>
+                        alert('Welcome, " . htmlspecialchars($username) . "!');
+                        window.location.href = '../index.html';
+                      </script>";
+            } elseif ($user_type === 'A') {
+                echo "<script>
+                        alert('Welcome, Admin " . htmlspecialchars($username) . "!');
+                        window.location.href = '../admin.html';
+                      </script>";
+            }
+        } else {
+            // Invalid credentials
+            echo "<script>
+                    alert('Invalid email or password. Please try again.');
+                    window.location.href = '../login.html';
+                  </script>";
+        }
     } else {
+        // No matching user found
         echo "<script>
                 alert('Invalid email or password. Please try again.');
-                window.location.href = 'login.html';
+                window.location.href = '../login.html';
               </script>";
     }
-} else {
+} catch (PDOException $e) {
+    // Handle any database errors
     echo "<script>
-            alert('Invalid email or password. Please try again.');
-            window.location.href = 'login.html';
+            alert('Error: " . $e->getMessage() . "');
+            window.location.href = '../login.html';
           </script>";
 }
 
-// Close the statement and connection
-$stmt->close();
-$conn->close();
+// Close the connection
+$conn = null;
 ?>
