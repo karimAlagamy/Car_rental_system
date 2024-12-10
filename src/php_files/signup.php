@@ -1,22 +1,13 @@
 <?php
 
-// Connection details
-$servername = "127.0.0.1"; 
-$username = "root";
-$password = "";
-$dbname = "registration_form";
+require_once "utilities.php";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Connect to the database
+$conn = getDatabaseConnection();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Start transaction
-    $conn->begin_transaction();
+    $conn->beginTransaction(); // Correct method name
 
     try {
         // Get user input
@@ -26,29 +17,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $phone = $_POST["phone"];
         $address = $_POST["address"];
         $username = $_POST["username"];
-        $password = md5($_POST["password"]); // Use MD5 to hash the password
+        $password = $_POST["password"]; // Use password_hash for secure hashing
 
         // Insert new user into the database
-        $stmt = $conn->prepare("INSERT INTO user (name, surname, email, phone, address, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $name, $surname, $email, $phone, $address, $username, $password);
-        $stmt->execute();
+        $stmt = $conn->prepare(
+            "INSERT INTO user (first_name, last_name, email, phone_number, address, username, password) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)"
+        );
+        $stmt->execute([$name, $surname, $email, $phone, $address, $username, $password]);
 
         // Commit the transaction
         $conn->commit();
+
+        // Success message and redirection
         echo "<script>
                 alert('Registration successful! Please log in.');
-                window.location.href = 'index.html';
+                window.location.href = '../login.html';
               </script>";
-    } catch (mysqli_sql_exception $e) {
-        $conn->rollback();
+    } catch (PDOException $e) {
+        // Rollback the transaction in case of error
+        $conn->rollBack();
 
         // Check if the error is a duplicate key violation
-        if ($e->getCode() == 1062) { // MySQL error code for duplicate entry
+        if ($e->errorInfo[1] == 1062) { // MySQL error code for duplicate entry
             echo "<script>
                     alert('Error: Duplicate entry detected (email or username already exists).');
                     window.location.href = 'registration.html';
                   </script>";
         } else {
+            // General error handling
             echo "<script>
                     alert('Error: " . $e->getMessage() . "');
                     window.location.href = 'registration.html';
@@ -58,10 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Close the statement
     if (isset($stmt)) {
-        $stmt->close();
+        $stmt = null; // PDO uses null to close statements
     }
 }
 
 // Close the connection
-$conn->close();
+$conn = null; // PDO uses null to close connections
 ?>
