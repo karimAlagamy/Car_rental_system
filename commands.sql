@@ -1,13 +1,16 @@
+-- Create the database
 CREATE DATABASE Car_rental_system;
 USE Car_rental_system;
 
+-- Create the office table
 CREATE TABLE office (
     office_id INT PRIMARY KEY,
     office_name VARCHAR(100) NOT NULL,
     location VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE customer (
+-- Create the user table (formerly customer table)
+CREATE TABLE user (
     customer_id INT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -15,9 +18,15 @@ CREATE TABLE customer (
     phone_number VARCHAR(15) NOT NULL,
     address VARCHAR(255) NOT NULL,
     username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    user_type CHAR(1) NOT NULL DEFAULT 'C' -- 'C' for customer, 'A' for admin
 );
 
+-- Add a domain constraint for user_type
+ALTER TABLE user
+ADD CONSTRAINT chk_user_type CHECK (user_type IN ('C', 'A'));
+
+-- Create the car table
 CREATE TABLE car (
     car_id INT PRIMARY KEY,
     model VARCHAR(100) NOT NULL,
@@ -27,6 +36,11 @@ CREATE TABLE car (
     office_id INT
 );
 
+-- Add a domain constraint for car status
+ALTER TABLE car
+ADD CONSTRAINT chk_car_status CHECK (status IN ('Active', 'Out of Service', 'Rented'));
+
+-- Create the reservation table
 CREATE TABLE reservation (
     reservation_id INT PRIMARY KEY,
     customer_id INT NOT NULL,
@@ -37,6 +51,7 @@ CREATE TABLE reservation (
     total_amount DECIMAL(10, 2) NOT NULL
 );
 
+-- Create the payment table
 CREATE TABLE payment (
     payment_id INT PRIMARY KEY,
     reservation_id INT NOT NULL,
@@ -44,14 +59,14 @@ CREATE TABLE payment (
     payment_date DATETIME NOT NULL
 );
 
-
+-- Add foreign key constraints
 ALTER TABLE car
 ADD CONSTRAINT FK_car_office FOREIGN KEY (office_id)
 REFERENCES office (office_id);
 
 ALTER TABLE reservation
-ADD CONSTRAINT FK_reservation_customer FOREIGN KEY (customer_id)
-REFERENCES customer (customer_id);
+ADD CONSTRAINT FK_reservation_user FOREIGN KEY (customer_id)
+REFERENCES user (customer_id);
 
 ALTER TABLE reservation
 ADD CONSTRAINT FK_reservations_car FOREIGN KEY (car_id)
@@ -60,7 +75,3 @@ REFERENCES car (car_id);
 ALTER TABLE payment
 ADD CONSTRAINT FK_payment_reservation FOREIGN KEY (reservation_id)
 REFERENCES reservation (reservation_id);
-------------------------------------------------------------------------------------------------
-
-ALTER TABLE car
-ADD CONSTRAINT chk_car_status CHECK (status IN ('Active', 'Out of Service', 'Rented'));
