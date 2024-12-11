@@ -125,6 +125,5 @@ function getReservationsByCustomer($customerId) {
     }
 }
 
-getDatabaseConnection();
 
 ?>
