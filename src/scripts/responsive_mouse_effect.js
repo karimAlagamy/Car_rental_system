@@ -12,7 +12,7 @@ div.addEventListener("mousemove", (e) => {
     "absolute",
     "w-52",
     "h-52",
-    "bg-indigo-200",
+    "bg-indigo-100",
     "bg-opacity-10",
     "rounded-full",
     "blur-xl",

@@ -1,34 +1,271 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/styles.css" rel="stylesheet" />
     <title>Registration Form</title>
   </head>
   <body>
-    <form action="php_files/signup.php" method="POST">
-      <label for="name">First Name:</label>
-      <input type="text" id="name" name="name" required /><br />
+    <header class="bg-white z-50">
+      <nav
+        class="mx-auto flex max-w-7xl items-center justify-center p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div class="flex items-center">
+          <a href="index.html" class="flex items-center">
+            <img
+              class="h-8 w-auto"
+              src="/Car_rental_system/src/img/Sawa2na.png"
+              alt="Sawa2na Logo"
+            />
+          </a>
+        </div>
+      </nav>
+    </header>
+    <!-- FORM -->
+    <div
+      id="responsive-div"
+      class="relative bg-gradient-to-br from-slate-50 to-slate-100 overflow p-6 min-h-screen"
+    >
+      <!-- Dynamic lighting effect -->
+      <div id="lighting-effect"></div>
+      <div
+        class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 z-10 relative"
+      >
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2
+            class="mt-10 text-center text-2xl font-bold tracking-tight text-black-100"
+          >
+            Sign up & get started now!
+          </h2>
+        </div>
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form class="" action="php_files/signup.php" method="POST">
+            <div>
+              <label class="block text-sm font-medium text-black" for="name"
+                >First Name:</label
+              >
+              <div class="mt-2">
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                /><br />
+              </div>
+            </div>
 
-      <label for="surname">Last Name:</label>
-      <input type="text" id="surname" name="surname" required /><br />
+            <div>
+              <label class="block text-sm font-medium text-black" for="surname"
+                >Last Name:</label
+              >
+              <div class="mt-2">
+                <input
+                  type="text"
+                  id="surname"
+                  name="surname"
+                  required
+                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                /><br />
+              </div>
+            </div>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required /><br />
+            <div>
+              <label class="block text-sm font-medium text-black" for="email"
+                >Email:</label
+              >
+              <div class="mt-2">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                /><br />
+              </div>
+            </div>
 
-      <label for="phone">Phone:</label>
-      <input type="text" id="phone" name="phone" required /><br />
+            <div>
+              <label class="block text-sm font-medium text-black" for="phone"
+                >Phone:</label
+              >
+              <div class="mt-2">
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  required
+                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                /><br />
+              </div>
+            </div>
 
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" required /><br />
+            <div>
+              <label class="block text-sm font-medium text-black" for="address"
+                >Address:</label
+              >
+              <div class="mt-2">
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  required
+                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                /><br />
+              </div>
+            </div>
 
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required /><br />
+            <div>
+              <label class="block text-sm font-medium text-black" for="username"
+                >Username:</label
+              >
+              <div class="mt-2">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  required
+                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                /><br />
+              </div>
+            </div>
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required /><br />
+            <div>
+              <label class="block text-sm font-medium text-black" for="password"
+                >Password:</label
+              >
+              <div class="mt-2">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm"
+                /><br />
+              </div>
+            </div>
 
-      <button type="submit">Register</button>
-    </form>
+            <div>
+              <button
+                type="submit"
+                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-200">
+      <div class="container mx-auto py-10 px-4 md:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <!-- Logo Section -->
+          <div>
+            <img
+              class="h-8 w-auto"
+              src="/Car_rental_system/src/img/Sawa2na.png"
+              alt=""
+            />
+          </div>
+
+          <!-- Solutions -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-4"
+            >
+              Solutions
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Marketing</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Analytics</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Automation</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Commerce</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Insights</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-4"
+            >
+              Support
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Submit Ticket</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900">Guides</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-4"
+            >
+              Legal
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-500 hover:text-gray-900"
+                  >License</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="mt-10 border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500"
+        >
+          <p>&copy; 2024 Sawa2na Aktar, Inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/responsive_mouse_effect.js"></script>
   </body>
 </html>
