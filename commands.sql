@@ -23,6 +23,9 @@ CREATE TABLE user (
 
 CREATE TABLE car (
     car_id INT PRIMARY KEY,
+    -- SEE HERE
+    -- make VARCHAR(100) NOT NULL,
+    -- no_of_seats INT NOT NULL,
     model VARCHAR(100) NOT NULL,
     year INT NOT NULL,
     plate_number VARCHAR(20) UNIQUE NOT NULL,
