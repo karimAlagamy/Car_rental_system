@@ -125,5 +125,6 @@ function getReservationsByCustomer($customerId) {
     }
 }
 
+// add search results handling for search.html
 
 ?>

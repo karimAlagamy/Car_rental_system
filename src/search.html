@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <title>Car Search</title>
+    <link href="/Car_rental_system/dist/styles.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link href="/dist/styles.css" rel="stylesheet" />
   </head>
-  <body class="bg-gray-100 text-gray-800">
+  <body class="bg-gray-100">
     <!-- Header -->
     <header class="bg-white shadow-md">
       <nav
@@ -19,7 +19,7 @@
       >
         <!-- Logo -->
         <div class="flex items-center">
-          <a href="#">
+          <a href="user-dashboard.html">
             <img
               class="h-8 w-auto"
               src="/Car_rental_system/src/img/Sawa2na.png"
@@ -103,7 +103,6 @@
         </nav>
       </div>
     </header>
-
     <script>
       // Mobile menu toggle
       const menuButton = document.getElementById("mobile-menu-button");
@@ -113,57 +112,167 @@
         mobileMenu.classList.toggle("hidden");
       });
     </script>
+    <!-- Search Form -->
+    <form
+      action="search_results.php"
+      method="GET"
+      class="bg-slate-50 shadow-lg rounded-lg p-6 mx-auto my-10 flex flex-wrap gap-6 max-w-7xl place-content-center"
+    >
+      <!-- Row 1: Pick-up & Return -->
+      <div class="w-full sm:w-auto flex-1">
+        <label for="location" class="block text-sm font-medium text-gray-700">
+          Pick-up & Return
+        </label>
+        <div class="relative mt-1">
+          <input
+            id="location"
+            name="location"
+            type="text"
+            class="w-full border border-gray-300 rounded-md py-2 pl-10 pr-4 focus:ring-indigo-500 focus:border-indigo-500"
+            placeholder="Airport, city or address"
+            required
+          />
+          <div
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-4.35-4.35M10 6a6 6 0 100 12 6 6 0 000-12z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <a href="#" class="text-sm text-gray-500 underline mt-2 block">
+          + Different return location
+        </a>
+      </div>
 
-    <!-- Main Content -->
-    <main class="container mx-auto py-8">
-      <h2 class="text-2xl font-semibold mb-6">Welcome, [Customer Name]</h2>
-      <!-- Reservations & Payments -->
-      <div class="container mx-auto mt-6 grid grid-cols-3 gap-4 pb-8">
-        <div
-          class="bg-white shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
+      <!-- Pick-up Date -->
+      <div>
+        <label
+          for="pickup-date"
+          class="block text-sm font-medium text-gray-700"
         >
-          <p class="text-gray-600">Active Reservations</p>
-          <h2 class="text-2xl font-bold">2</h2>
-        </div>
-        <div
-          class="bg-white shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
-        >
-          <p class="text-gray-600">Total Reservations</p>
-          <h2 class="text-2xl font-bold">15</h2>
-        </div>
-        <div
-          class="bg-white shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
-        >
-          <p class="text-gray-600">Total Payments</p>
-          <h2 class="text-2xl font-bold">$24,598.00</h2>
+          Pick-up Date
+        </label>
+        <div class="flex space-x-2 mt-1">
+          <input
+            id="pickup-date"
+            name="pickup_date"
+            type="date"
+            class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
+            required
+          />
+          <input
+            id="pickup-time"
+            name="pickup_time"
+            type="time"
+            class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
+            required
+          />
         </div>
       </div>
 
-      <!-- Quick Actions -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <a
-          href="search.html"
-          class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition"
+      <!-- Return Date -->
+      <div>
+        <label
+          for="return-date"
+          class="block text-sm font-medium text-gray-700"
         >
-          <h3 class="text-lg font-semibold mb-2">Search Available Cars</h3>
-          <p>Find the perfect car for your next trip.</p>
-        </a>
-        <a
-          href="reservation-history.html"
-          class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition"
-        >
-          <h3 class="text-lg font-semibold mb-2">View Reservations</h3>
-          <p>Check your upcoming and past reservations.</p>
-        </a>
-        <a
-          href="profile.html"
-          class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition"
-        >
-          <h3 class="text-lg font-semibold mb-2">Update Profile</h3>
-          <p>Keep your personal information up to date.</p>
-        </a>
+          Return Date
+        </label>
+        <div class="flex space-x-2 mt-1">
+          <input
+            id="return-date"
+            name="return_date"
+            type="date"
+            class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
+            required
+          />
+          <input
+            id="return-time"
+            name="return_time"
+            type="time"
+            class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
+            required
+          />
+        </div>
       </div>
-    </main>
+
+      <!-- Row 2: Car Make, Model, and Seats -->
+      <div class="w-full flex flex-wrap gap-6 mt-4">
+        <!-- Make Dropdown -->
+        <div class="flex-1">
+          <label for="make" class="block text-sm font-medium text-gray-700">
+            Car Make
+          </label>
+          <select
+            id="make"
+            name="make"
+            class="w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 mt-1"
+          >
+            <option value="" disabled selected>Select Make</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Honda">Honda</option>
+            <option value="Ford">Ford</option>
+            <option value="BMW">BMW</option>
+            <option value="Mercedes">Mercedes</option>
+          </select>
+        </div>
+
+        <!-- Model Input -->
+        <div class="flex-1">
+          <label for="model" class="block text-sm font-medium text-gray-700">
+            Car Model
+          </label>
+          <input
+            id="model"
+            name="model"
+            type="text"
+            placeholder="Enter Model"
+            class="w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 mt-1"
+          />
+        </div>
+
+        <!-- Number of Seats -->
+        <div class="flex-1">
+          <label for="seats" class="block text-sm font-medium text-gray-700">
+            Number of Seats
+          </label>
+          <select
+            id="seats"
+            name="seats"
+            class="w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 mt-1"
+          >
+            <option value="" disabled selected>Select Seats</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+            <option value="8+">8+</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Search Button -->
+      <div class="w-full flex justify-center items-center mt-6">
+        <button
+          type="submit"
+          class="bg-indigo-500 hover:bg-indigo-600 ease-in duration-100 text-white font-medium py-2 px-6 rounded-md focus:outline-none"
+        >
+          Show Cars
+        </button>
+      </div>
+    </form>
     <!-- Footer -->
     <footer class="bg-gray-50 border-t border-gray-200">
       <div class="container mx-auto py-10 px-4 md:px-8">
