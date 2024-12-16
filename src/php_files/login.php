@@ -32,7 +32,7 @@ try {
             if ($user_type === 'C') {
                 echo "<script>
                         alert('Welcome, " . htmlspecialchars($username) . "!');
-                        window.location.href = '../index.html';
+                        window.location.href = '../user-dashboard.html';
                       </script>";
             } elseif ($user_type === 'A') {
                 echo "<script>

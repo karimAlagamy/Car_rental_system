@@ -125,6 +125,7 @@ function getReservationsByCustomer($customerId) {
     }
 }
 
-// add search results handling for search.html
+// admin functions to be implemented
+// change car status 
 
 ?>
