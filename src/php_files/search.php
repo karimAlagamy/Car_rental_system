@@ -27,9 +27,11 @@ try {
         FROM car c
         JOIN office o ON c.office_id = o.office_id
         LEFT JOIN reservation r ON c.car_id = r.car_id
+            -- Get cars that are not reserved during the specified period
             AND r.pickup_date <= :return_date
             AND r.return_date >= :pick_up_date
         WHERE o.location LIKE :office_location
+        -- Get cars that are not reserved in the specified time period
         AND r.car_id IS NULL
         AND c.status = 'active'
     ";
