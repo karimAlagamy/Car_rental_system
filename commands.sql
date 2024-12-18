@@ -43,12 +43,13 @@ CREATE TABLE reservation (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
     car_id INT NOT NULL,
-    reservation_date DATETIME NOT NULL,
-    pickup_date DATETIME NOT NULL,
-    return_date DATETIME NOT NULL,
+    reservation_date DATE NOT NULL,
+    pickup_date DATE NOT NULL,
+    return_date DATE NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
-    CONSTRAINT chk_reservation_dates CHECK (reservation_date < return_date)
+    CONSTRAINT chk_reservation_dates CHECK (reservation_date < pickup_date AND pickup_date < return_date)
 );
+
 
 INSERT INTO office (office_id, office_name, location) VALUES
 (1, 'Downtown Office', 'Downtown City Center'),
@@ -103,16 +104,16 @@ INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, o
 
 
 INSERT INTO reservation (reservation_id, customer_id, car_id, reservation_date, pickup_date, return_date, total_amount) VALUES
-(1, 1, 1, '2024-12-01 10:00:00', '2024-12-05 09:00:00', '2024-12-10 18:00:00', 225.0),
-(2, 2, 2, '2024-12-02 14:00:00', '2024-12-07 10:00:00', '2024-12-15 20:00:00', 400.0),
-(3, 3, 3, '2024-11-30 08:00:00', '2024-12-01 12:00:00', '2024-12-05 16:00:00', 192.0),
-(4, 4, 6, '2024-12-04 09:00:00', '2024-12-10 12:00:00', '2024-12-15 15:00:00', 200.0),
-(5, 5, 7, '2024-12-05 11:00:00', '2024-12-08 14:00:00', '2024-12-12 18:00:00', 220.0),
-(6, 6, 8, '2024-12-06 10:00:00', '2024-12-07 09:00:00', '2024-12-14 18:00:00', 350.0),
-(7, 7, 9, '2024-12-07 11:00:00', '2024-12-08 08:00:00', '2024-12-15 19:00:00', 420.0),
-(8, 8, 10, '2024-12-08 09:00:00', '2024-12-09 10:00:00', '2024-12-16 20:00:00', 560.0),
-(9, 9, 11, '2024-12-09 12:00:00', '2024-12-10 13:00:00', '2024-12-17 21:00:00', 455.0),
-(10, 10, 12, '2024-12-10 14:00:00', '2024-12-11 15:00:00', '2024-12-18 22:00:00', 490.0);
+(1, 1, 1, '2024-12-01', '2024-12-05', '2024-12-10', 225.0),
+(2, 2, 2, '2024-12-02', '2024-12-07', '2024-12-15', 400.0),
+(3, 3, 3, '2024-11-30', '2024-12-01', '2024-12-05', 192.0),
+(4, 4, 6, '2024-12-04', '2024-12-10', '2024-12-15', 200.0),
+(5, 5, 7, '2024-12-05', '2024-12-08', '2024-12-12', 220.0),
+(6, 6, 8, '2024-12-06', '2024-12-07', '2024-12-14', 350.0),
+(7, 7, 9, '2024-12-07', '2024-12-08', '2024-12-15', 420.0),
+(8, 8, 10, '2024-12-08', '2024-12-09', '2024-12-16', 560.0),
+(9, 9, 11, '2024-12-09', '2024-12-10', '2024-12-17', 455.0),
+(10, 10, 12, '2024-12-10', '2024-12-11', '2024-12-18', 490.0);
 
 
 

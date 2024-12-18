@@ -7,37 +7,87 @@ $conn = getDatabaseConnection();
 
 try {
     // Retrieve user input
-    $office_location = $_POST['location'];
-    $pick_up_date = $_POST['pickup_date'];
-    $return_date = $_POST['return_date'];
+    $office_location = '%' . $_POST['location'] . '%' ?? null; // Add % for LIKE partial match
+    $pick_up_date = $_POST['pickup_date'] ?? null;
+    $return_date = $_POST['return_date'] ?? null;
 
-    // NOT REQUIRED
-    $make = $_POST['make'];
-    $model = $_POST['model'];
-    $number_of_seats = $_POST['seats'];
-   
-} catch (PDOException $e) {
-    // Handle any database errors
-    echo "Error: " . $e->getMessage();
-}
-if(empty($make) && empty($model) && empty($number_of_seats)){
-    $stmt = $conn->prepare("SELECT c.make, c.model, c.year, c.no_of_seats, c.plate_number 
-    FROM car c JOIN reservation r ON c.car_id = r.car_id
-    JOIN office o ON c.office_id = o.office_id
-    WHERE o.location = :office_location AND ((r.pickup_date > :pick_up_date AND r.pickup_date > :return_date) OR (r.return_date < :pick_up_date))
-    ");
-    // Bind parameters
-    $stmt->bindParam(':office_location', $office_location, PDO::PARAM_STR);
-    $stmt->bindParam(':pick_up_date', $pick_up_date, PDO::PARAM_STR);
-    $stmt->bindParam(':return_date', $return_date, PDO::PARAM_STR);
-    // Execute the statement
+    // Optional filters
+    $make = $_POST['make'] ?? null;
+    $model = $_POST['model'] ?? null;
+    $number_of_seats = $_POST['seats'] ?? null;
+
+    // Ensure required fields are not empty
+    if (empty($office_location) || empty($pick_up_date) || empty($return_date)) {
+        die("Error: Location, pick-up date, and return date are required.");
+    }
+
+    // Start with the base query
+    $query = 
+    "   SELECT c.make, c.model, c.year, c.no_of_seats 
+        FROM car c
+        JOIN office o ON c.office_id = o.office_id
+        LEFT JOIN reservation r ON c.car_id = r.car_id
+            AND r.pickup_date <= :return_date
+            AND r.return_date >= :pick_up_date
+        WHERE o.location LIKE :office_location
+        AND r.car_id IS NULL
+        AND c.status = 'active'
+    ";
+
+    // Optional conditions array
+    $conditions = [];
+    $params = [
+        ':office_location' => $office_location,
+        ':pick_up_date' => $pick_up_date,
+        ':return_date' => $return_date
+    ];
+
+    if (!empty($make)) {
+        $conditions[] = "c.make = :make";
+        $params[':make'] = $make;
+    }
+
+    if (!empty($model)) {
+        $conditions[] = "c.model = :model";
+        $params[':model'] = $model;
+    }
+
+    if (!empty($number_of_seats)) {
+        $conditions[] = "c.no_of_seats = :number_of_seats";
+        $params[':number_of_seats'] = $number_of_seats;
+    }
+
+    // Append dynamic conditions if any
+    if (!empty($conditions)) {
+        $query .= " AND " . implode(" AND ", $conditions);
+    }
+
+    // Prepare the statement
+    $stmt = $conn->prepare($query);
+
+    // Bind all parameters dynamically
+    foreach ($params as $param => $value) {
+        $stmt->bindValue($param, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+    }
+
+    // Execute the query
     $stmt->execute();
 
-    // Fetch the results and display them in an HTML table
+    // Fetch the results
     $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    // Handle database errors
+    echo "Database Error: " . $e->getMessage();
+    exit;
+} catch (Exception $e) {
+    // Handle other errors
+    echo "Error: " . $e->getMessage();
+    exit;
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +111,23 @@ if(empty($make) && empty($model) && empty($number_of_seats)){
         tr:hover {
             background-color: #f5f5f5;
         }
+        button {
+            padding: 6px 12px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            width: fit-content;
+        }
     </style>
 </head>
 <body>
@@ -74,7 +141,7 @@ if(empty($make) && empty($model) && empty($number_of_seats)){
                     <th>Model</th>
                     <th>Year</th>
                     <th>No of Seats</th>
-                    <th>Plate Number</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,14 +151,21 @@ if(empty($make) && empty($model) && empty($number_of_seats)){
                         <td><?php echo htmlspecialchars($car['model']); ?></td>
                         <td><?php echo htmlspecialchars($car['year']); ?></td>
                         <td><?php echo htmlspecialchars($car['no_of_seats']); ?></td>
-                        <td><?php echo htmlspecialchars($car['plate_number']); ?></td>
+                        <td>
+                            <form method="POST" action="select_car.php">
+                                <input type="hidden" name="car_id" >
+                                <button type="submit">Reserve</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     <?php else: ?>
-        <p style="text-align: center;">No available cars found for the specified dates and location.</p>
+        <p style="text-align: center;">No available cars found for the specified filters.</p>
     <?php endif; ?>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="window.history.back();">Back</button>
 </body>
 </html>
-

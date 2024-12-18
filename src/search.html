@@ -20,11 +20,7 @@
         <!-- Logo -->
         <div class="flex items-center">
           <a href="user-dashboard.html">
-            <img
-              class="h-8 w-auto"
-              src="/Car_rental_system/src/img/Sawa2na.png"
-              alt="Sawa2na Logo"
-            />
+            <img class="h-8 w-auto" src="img/Sawa2na.png" alt="Sawa2na Logo" />
           </a>
         </div>
 
@@ -159,23 +155,17 @@
       <!-- Pick-up Date -->
       <div>
         <label
-          for="pickup-date"
+          for="pickup_date"
           class="block text-sm font-medium text-gray-700"
         >
           Pick-up Date
         </label>
         <div class="flex space-x-2 mt-1">
           <input
-            id="pickup-date"
+            id="pickup_date"
             name="pickup_date"
-            type="date"
-            class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
-            required
-          />
-          <input
-            id="pickup-time"
-            name="pickup_time"
-            type="time"
+            type="text"
+            placeholder="YYYY-MM-DD"
             class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
             required
           />
@@ -185,28 +175,35 @@
       <!-- Return Date -->
       <div>
         <label
-          for="return-date"
+          for="return_date"
           class="block text-sm font-medium text-gray-700"
         >
           Return Date
         </label>
         <div class="flex space-x-2 mt-1">
           <input
-            id="return-date"
+            id="return_date"
             name="return_date"
-            type="date"
-            class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
-            required
-          />
-          <input
-            id="return-time"
-            name="return_time"
-            type="time"
+            type="text"
+            placeholder="YYYY-MM-DD"
             class="border border-gray-300 rounded-md py-2 px-4 focus:ring-orange-500 focus:border-orange-500"
             required
           />
         </div>
       </div>
+
+      <script>
+        // Initialize Flatpickr for Pick-up and Return Dates
+        flatpickr("#pickup_date", {
+          dateFormat: "Y-m-d", // Enforce YYYY-MM-DD format
+          defaultDate: "today", // Set today's date as default
+        });
+
+        flatpickr("#return_date", {
+          dateFormat: "Y-m-d", // Enforce YYYY-MM-DD format
+          defaultDate: "today", // Set today's date as default
+        });
+      </script>
 
       <!-- Row 2: Car Make, Model, and Seats -->
       <div class="w-full flex flex-wrap gap-6 mt-4">
@@ -279,11 +276,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <!-- Logo Section -->
           <div>
-            <img
-              class="h-8 w-auto"
-              src="/Car_rental_system/src/img/Sawa2na.png"
-              alt=""
-            />
+            <img class="h-8 w-auto" src="img/Sawa2na.png" alt="" />
           </div>
 
           <!-- Solutions -->
