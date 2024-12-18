@@ -12,7 +12,7 @@ CREATE TABLE office (
 
 -- Create users table
 CREATE TABLE `user` (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -41,13 +41,13 @@ CREATE TABLE car (
 -- Create reservation table
 CREATE TABLE reservation (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT NOT NULL,
+    user_id INT NOT NULL,
     car_id INT NOT NULL,
     reservation_date DATE NOT NULL,
     pickup_date DATE NOT NULL,
     return_date DATE NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
-    CONSTRAINT chk_reservation_dates CHECK (reservation_date < pickup_date AND pickup_date < return_date)
+    CONSTRAINT chk_reservation_dates CHECK (reservation_date <= pickup_date AND pickup_date < return_date)
 );
 
 
@@ -64,7 +64,7 @@ INSERT INTO office (office_id, office_name, location) VALUES
 (10, 'Countryside Office', 'Rural Area');
 
 
-INSERT INTO `user` (customer_id, first_name, last_name, email, phone_number, address, username, password, user_type) VALUES
+INSERT INTO `user` (user_id, first_name, last_name, email, phone_number, address, username, password, user_type) VALUES
 (1, 'John', 'Doe', 'johndoe@example.com', '1234567890', '123 Main St, Downtown City Center', 'johndoe', 'password123', 'C'),
 (2, 'Jane', 'Smith', 'janesmith@example.com', '0987654321', '456 Oak Rd, Suburban Mall', 'janesmith', 'securepassword', 'C'),
 (3, 'Alice', 'Johnson', 'alicej@example.com', '1112223333', '789 Pine Ave, Airport Region', 'alicej', 'mypassword', 'C'),
@@ -103,7 +103,7 @@ INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, o
 (20, 'Ford', 'Mustang', 4, 2021, 'UVW456', 'Active', 2, 90.00);
 
 
-INSERT INTO reservation (reservation_id, customer_id, car_id, reservation_date, pickup_date, return_date, total_amount) VALUES
+INSERT INTO reservation (reservation_id, user_id, car_id, reservation_date, pickup_date, return_date, total_amount) VALUES
 (1, 1, 1, '2024-12-01', '2024-12-05', '2024-12-10', 225.0),
 (2, 2, 2, '2024-12-02', '2024-12-07', '2024-12-15', 400.0),
 (3, 3, 3, '2024-11-30', '2024-12-01', '2024-12-05', 192.0),
@@ -122,7 +122,7 @@ ALTER TABLE car
 ADD CONSTRAINT FK_car_office FOREIGN KEY (office_id) REFERENCES office (office_id) ON DELETE SET NULL ON UPDATE CASCADE;
 
 ALTER TABLE reservation
-ADD CONSTRAINT FK_reservation_user FOREIGN KEY (customer_id) REFERENCES `user` (customer_id) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT FK_reservation_user FOREIGN KEY (user_id) REFERENCES `user` (user_id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE reservation
 ADD CONSTRAINT FK_reservations_car FOREIGN KEY (car_id) REFERENCES car (car_id) ON DELETE CASCADE ON UPDATE CASCADE;

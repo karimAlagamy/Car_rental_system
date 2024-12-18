@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session
 
 require_once "utilities.php";
 
@@ -11,7 +12,7 @@ try {
     $password = $_POST['password'];
 
     // Prepare the SQL statement
-    $stmt = $conn->prepare("SELECT first_name, password, user_type, username FROM user WHERE email = ?");
+    $stmt = $conn->prepare("SELECT user_id, first_name, password, user_type, username FROM user WHERE email = ?");
 
     // Execute the statement with the parameter
     $stmt->execute([$email]);
@@ -21,6 +22,7 @@ try {
 
     if ($result) {
         // Retrieve values from the result
+        $retrieved_id = $result['user_id']; 
         $retrieved_name = $result['first_name'];
         $retrieved_password = $result['password'];
         $user_type = $result['user_type'];
@@ -28,6 +30,11 @@ try {
 
         // Verify the password
         if ($password === $retrieved_password && $retrieved_name != "root") {
+            // Set session variables upon successful login
+            $_SESSION['user_id'] = $retrieved_id;
+            $_SESSION['username'] = $username;
+            $_SESSION['user_type'] = $user_type;
+
             // Redirect based on user type
             if ($user_type === 'C') {
                 echo "<script>

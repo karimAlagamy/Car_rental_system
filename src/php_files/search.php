@@ -21,9 +21,20 @@ try {
         die("Error: Location, pick-up date, and return date are required.");
     }
 
+    $pickup_date_obj = new DateTime($pick_up_date);
+    $return_date_obj = new DateTime($return_date);
+
+    // Check if return date is greater than pick-up date
+    if ($return_date_obj <= $pickup_date_obj) {
+        echo "<script>
+            alert('Return date must be after the pick-up date.');
+            window.history.back();
+        </script>";
+    }
+
     // Start with the base query
     $query = 
-    "   SELECT c.make, c.model, c.year, c.no_of_seats 
+    "   SELECT c.make, c.model, c.year, c.no_of_seats, c.car_id
         FROM car c
         JOIN office o ON c.office_id = o.office_id
         LEFT JOIN reservation r ON c.car_id = r.car_id
@@ -154,8 +165,11 @@ try {
                         <td><?php echo htmlspecialchars($car['year']); ?></td>
                         <td><?php echo htmlspecialchars($car['no_of_seats']); ?></td>
                         <td>
-                            <form method="POST" action="select_car.php">
-                                <input type="hidden" name="car_id" >
+                            <form method="POST" action="rent.php">
+                                <!-- Pass car_id, pickup_date, and return_date -->
+                                <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($car['car_id']); ?>">
+                                <input type="hidden" name="pickup_date" value="<?php echo htmlspecialchars($pick_up_date); ?>">
+                                <input type="hidden" name="return_date" value="<?php echo htmlspecialchars($return_date); ?>">
                                 <button type="submit">Reserve</button>
                             </form>
                         </td>
