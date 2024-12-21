@@ -1,1 +1,310 @@
-// TO BE IMPLEMENTED 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link href="/dist/styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-900 text-gray-800">
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-md">
+      <nav
+        class="container mx-auto flex items-center justify-between p-4 lg:px-8"
+        aria-label="Global"
+      >
+        <!-- Logo -->
+        <div
+          class="flex items-center text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+        >
+          <a href="#">Admin Dashboard</a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden lg:flex lg:gap-x-8">
+          <a
+            href="search.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Search Cars</a
+          >
+          <a
+            href="reservation-history.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Reservations</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+        </div>
+
+        <!-- Logout -->
+        <div class="hidden lg:flex">
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-green-400" id="mobile-menu-button">
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="hidden lg:hidden bg-gray-800" id="mobile-menu">
+        <nav class="flex flex-col items-start p-4 space-y-4">
+          <a
+            href="search.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Search Cars</a
+          >
+          <a
+            href="reservation-history.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Reservations</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-8">
+      <h2 class="text-2xl font-semibold text-green-400 mb-6 font-mono">
+        Welcome, [Admin Name]
+      </h2>
+      <!-- Reservations & Payments -->
+      <div class="container mx-auto mt-6 grid grid-cols-3 gap-4 pb-8">
+        <div
+          class="bg-gray-800 shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
+        >
+          <p class="text-green-300 font-mono">Active Reservations</p>
+          <h2 class="text-2xl font-bold text-green-400 font-mono">2</h2>
+        </div>
+        <div
+          class="bg-gray-800 shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
+        >
+          <p class="text-green-300 font-mono">Total Reservations</p>
+          <h2 class="text-2xl font-bold text-green-400 font-mono">15</h2>
+        </div>
+        <div
+          class="bg-gray-800 shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
+        >
+          <p class="text-green-300 font-mono">Total Payments</p>
+          <h2 class="text-2xl font-bold text-green-400 font-mono">
+            $24,598.00
+          </h2>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <a
+          href="search_admin.html"
+          class="bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition"
+        >
+          <h3 class="text-lg font-semibold text-green-400 font-mono mb-2">
+            Search Available Cars
+          </h3>
+          <p class="text-green-300 font-mono">Look for inactive reservations</p>
+        </a>
+        <a
+          href="add_cars.html"
+          class="bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition"
+        >
+          <h3 class="text-lg font-semibold text-green-400 font-mono mb-2">
+            Add Cars
+          </h3>
+          <p class="text-green-300 font-mono">
+            Expand your inventory by adding new vehicles to the system
+          </p>
+        </a>
+        <a
+          href="print_reports.html"
+          class="bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition"
+        >
+          <h3 class="text-lg font-semibold text-green-400 font-mono mb-2">
+            Print Reports
+          </h3>
+          <p class="text-green-300 font-mono">
+            Generate detailed reports to track performance and activities
+          </p>
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700">
+      <div class="container mx-auto py-10 px-4 md:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <!-- Logo Section -->
+          <div>
+            <img
+              class="h-8 w-auto filter invert brightness-0"
+              src="/Car_rental_system/src/img/Sawa2na.png"
+              alt="Sawa2na Logo"
+            />
+          </div>
+
+          <!-- Solutions -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-green-400 uppercase tracking-wide mb-4 font-mono"
+            >
+              Solutions
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Marketing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Analytics</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Automation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Commerce</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Insights</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-green-400 uppercase tracking-wide mb-4 font-mono"
+            >
+              Support
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Submit Ticket</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Guides</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-green-400 uppercase tracking-wide mb-4 font-mono"
+            >
+              Legal
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >License</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="mt-10 border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-green-300 font-mono"
+        >
+          <p>&copy; 2024 Sawa2na Aktar, Inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

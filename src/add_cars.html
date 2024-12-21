@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Cars</title>
+    <link href="/Car_rental_system/dist/styles.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-900 text-gray-800">
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-md">
+      <nav
+        class="container mx-auto flex items-center justify-between p-4 lg:px-8"
+        aria-label="Global"
+      >
+        <!-- Logo -->
+        <div
+          class="flex items-center text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+        >
+          <a href="#">Admin - Add Cars</a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden lg:flex lg:gap-x-8">
+          <a
+            href="search.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Search Cars</a
+          >
+          <a
+            href="reservation-history.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Reservations</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+        </div>
+
+        <!-- Logout -->
+        <div class="hidden lg:flex">
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-green-400" id="mobile-menu-button">
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="hidden lg:hidden bg-gray-800" id="mobile-menu">
+        <nav class="flex flex-col items-start p-4 space-y-4">
+          <a
+            href="search.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Search Cars</a
+          >
+          <a
+            href="reservation-history.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Reservations</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+    <!-- Search Form -->
+    <form
+      id="add-car-form"
+      action="php_files/add_cars.php"
+      method="POST"
+      class="bg-gray-800 shadow-lg rounded-lg p-6 mx-auto my-10 flex flex-wrap gap-6 max-w-7xl place-content-center text-green-400"
+    >
+      <!-- Row 1: MAIN Fields -->
+      <div class="w-full flex flex-wrap gap-6 mt-4">
+        <!-- Car ID -->
+        <div class="flex-1">
+          <label for="car_id" class="block text-sm font-medium">Car ID</label>
+          <input
+            id="car_id"
+            name="car_id"
+            type="text"
+            placeholder="Enter Car ID"
+            class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          />
+        </div>
+
+        <!-- Plate Number -->
+        <div class="flex-1">
+          <label for="plate_number" class="block text-sm font-medium">
+            Plate Number
+          </label>
+          <input
+            id="plate_number"
+            name="plate_number"
+            type="text"
+            placeholder="Enter Plate Number"
+            class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          />
+        </div>
+
+        <!-- Office ID -->
+        <div class="flex-1">
+          <label for="office_id" class="block text-sm font-medium"
+            >Office ID</label
+          >
+          <input
+            id="office_id"
+            name="office_id"
+            type="text"
+            placeholder="Enter Office ID"
+            class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          />
+        </div>
+
+        <!-- Day Rate -->
+        <div class="flex-1">
+          <label for="day_rate" class="block text-sm font-medium"
+            >Day Rate</label
+          >
+          <input
+            id="day_rate"
+            name="day_rate"
+            type="number"
+            placeholder="Enter Day Rate"
+            class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          />
+        </div>
+
+        <!-- Car Status -->
+        <div class="flex-1">
+          <label for="status" class="block text-sm font-medium"
+            >Car Status</label
+          >
+          <select
+            id="status"
+            name="status"
+            class="w-full bg-black border border-gray-700 text-gray-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          >
+            <option value="" disabled selected>Select Status</option>
+            <option value="active">Active</option>
+            <option value="out_of_service">Out of Service</option>
+            <option value="rented">Rented</option>
+          </select>
+        </div>
+      </div>
+      <!-- Row 2: Car Make, Model, and Seats -->
+      <div class="w-full flex flex-wrap gap-6 mt-4">
+        <!-- Make Dropdown -->
+        <div class="flex-1">
+          <label for="make" class="block text-sm font-medium text-green-400">
+            Car Make
+          </label>
+          <select
+            id="make"
+            name="make"
+            class="mt-1 // py-2 px-4 w-full bg-black border border-gray-700 text-gray-400 rounded-md focus:ring-green-500 focus:border-green-500"
+          >
+            <option value="" disabled selected>Select Make</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Honda">Honda</option>
+            <option value="Ford">Ford</option>
+            <option value="BMW">BMW</option>
+            <option value="Mercedes">Mercedes</option>
+          </select>
+        </div>
+
+        <!-- Model Input -->
+        <div class="flex-1">
+          <label for="model" class="block text-sm font-medium text-green-400">
+            Car Model
+          </label>
+          <input
+            id="model"
+            name="model"
+            type="text"
+            placeholder="Enter Model"
+            class="mt-1 // py-2 px-4 w-full bg-black border border-gray-700 text-green-400 rounded-md focus:ring-green-500 focus:border-green-500"
+          />
+        </div>
+
+        <!-- Year -->
+        <div class="flex-1">
+          <label for="year" class="block text-sm font-medium text-green-400">
+            Year
+          </label>
+          <select
+            id="year"
+            name="year"
+            class="mt-1 py-2 px-4 w-full bg-black border border-gray-700 text-gray-400 rounded-md focus:ring-green-500 focus:border-green-500"
+          >
+            <option value="" disabled selected>Select Year</option>
+          </select>
+        </div>
+
+        <script>
+          // Populate year dropdown dynamically
+          const yearDropdown = document.getElementById("year");
+          for (let year = 2025; year >= 2000; year--) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearDropdown.appendChild(option);
+          }
+        </script>
+
+        <!-- Number of Seats -->
+        <div class="flex-1">
+          <label for="seats" class="block text-sm font-medium text-green-400">
+            Number of Seats
+          </label>
+          <select
+            id="seats"
+            name="seats"
+            class="mt-1 py-2 px-4 w-full bg-black border border-gray-700 text-gray-400 rounded-md focus:ring-green-500 focus:border-green-500"
+          >
+            <option value="" disabled selected>Select Seats</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+            <option value="8+">8+</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Search Button -->
+      <div class="w-full flex justify-center items-center mt-6">
+        <button
+          type="submit"
+          class="bg-green-500 hover:bg-green-600 ease-in duration-100 text-black font-medium py-2 px-6 rounded-md focus:outline-none"
+        >
+          Add Car
+        </button>
+      </div>
+    </form>
+    <!-- Plus Button -->
+    <div
+      id="add-form-btn-container"
+      class="flex justify-center items-center mt-6"
+    >
+      <button
+        id="add-form-btn"
+        type="button"
+        class="bg-green-500 hover:bg-green-600 ease-in duration-100 text-black font-medium py-2 px-4 rounded-full text-xl focus:outline-none mb-10"
+      >
+        +
+      </button>
+    </div>
+
+    <!-- Container for Multiple Forms -->
+    <div id="forms-container"></div>
+
+    <script>
+      const addFormButton = document.getElementById("add-form-btn");
+      const formsContainer = document.getElementById("forms-container");
+      const originalForm = document.getElementById("add-car-form");
+
+      addFormButton.addEventListener("click", () => {
+        // Clone the existing form
+        const newForm = originalForm.cloneNode(true);
+
+        // Clear input values and placeholders
+        const inputs = newForm.querySelectorAll("input, select");
+        inputs.forEach((input) => {
+          if (input.tagName === "SELECT") {
+            input.value = ""; // Reset dropdown
+          } else {
+            input.value = ""; // Clear input fields
+            input.placeholder = input.placeholder.replace("Enter", "New");
+          }
+        });
+
+        // Append the cloned form to the container
+        formsContainer.appendChild(newForm);
+      });
+    </script>
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700">
+      <div class="container mx-auto py-10 px-4 md:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <!-- Logo Section -->
+          <div>
+            <img
+              class="h-8 w-auto filter invert brightness-0"
+              src="/Car_rental_system/src/img/Sawa2na.png"
+              alt="Sawa2na Logo"
+            />
+          </div>
+
+          <!-- Solutions -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-green-400 uppercase tracking-wide mb-4 font-mono"
+            >
+              Solutions
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Marketing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Analytics</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Automation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Commerce</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Insights</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-green-400 uppercase tracking-wide mb-4 font-mono"
+            >
+              Support
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Submit Ticket</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Guides</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4
+              class="text-sm font-semibold text-green-400 uppercase tracking-wide mb-4 font-mono"
+            >
+              Legal
+            </h4>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-green-300 hover:text-green-400 font-mono"
+                  >License</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="mt-10 border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-green-300 font-mono"
+        >
+          <p>&copy; 2024 Sawa2na Aktar, Inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
