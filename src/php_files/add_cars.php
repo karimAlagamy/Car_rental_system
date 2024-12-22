@@ -42,7 +42,10 @@ try {
     // Execute the query
     $stmt->execute();
 
-    echo "Car successfully added";
+    echo "<script>
+                alert('Car added successfully');
+                window.location.href = '../add_cars.html';
+          </script>";
 
 } catch (PDOException $e) {
     // Handle database errors
