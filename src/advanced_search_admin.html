@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
+    <title>Car Search</title>
+    <link href="/Car_rental_system/dist/styles.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link href="/dist/styles.css" rel="stylesheet" />
   </head>
   <body class="bg-gray-900 text-gray-800">
     <!-- Header -->
@@ -21,7 +21,7 @@
         <div
           class="flex items-center text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
         >
-          <a href="#">Admin Dashboard</a>
+          <a href="admin.html">Admin</a>
         </div>
 
         <!-- Navigation Links -->
@@ -99,7 +99,6 @@
         </nav>
       </div>
     </header>
-
     <script>
       // Mobile menu toggle
       const menuButton = document.getElementById("mobile-menu-button");
@@ -109,84 +108,73 @@
         mobileMenu.classList.toggle("hidden");
       });
     </script>
-
-    <!-- Main Content -->
-    <main class="container mx-auto py-8">
-      <h2 class="text-2xl font-semibold text-green-400 mb-6 font-mono">
-        Welcome, [Admin Name]
-      </h2>
-      <!-- Reservations & Payments -->
-      <div class="container mx-auto mt-6 grid grid-cols-3 gap-4 pb-8">
-        <div
-          class="bg-gray-800 shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
-        >
-          <p class="text-green-300 font-mono">Active Reservations</p>
-          <h2 class="text-2xl font-bold text-green-400 font-mono">2</h2>
-        </div>
-        <div
-          class="bg-gray-800 shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
-        >
-          <p class="text-green-300 font-mono">Total Reservations</p>
-          <h2 class="text-2xl font-bold text-green-400 font-mono">15</h2>
-        </div>
-        <div
-          class="bg-gray-800 shadow rounded-lg p-4 hover:shadow-lg transition duration-1000 ease-in"
-        >
-          <p class="text-green-300 font-mono">Total Payments</p>
-          <h2 class="text-2xl font-bold text-green-400 font-mono">
-            $24,598.00
-          </h2>
-        </div>
+    <!-- Simplified Form -->
+    <form
+      action="php_files/admin_advanced_search.php"
+      method="POST"
+      class="bg-gray-800 shadow-lg rounded-lg p-6 mx-auto my-10 flex flex-wrap gap-6 max-w-4xl place-content-center text-green-400"
+    >
+      <!-- Reservation Date -->
+      <div class="w-full sm:w-auto flex-1">
+        <label for="reservation_date" class="block text-sm font-medium">
+          Reservation Date
+        </label>
+        <input
+          id="reservation_date"
+          name="reservation_date"
+          type="text"
+          placeholder="YYYY-MM-DD"
+          class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+        />
+        <small class="italic text-gray-500">Optional</small>
       </div>
 
-      <!-- Quick Actions -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <a
-          href="search_admin.html"
-          class="bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition"
-        >
-          <h3 class="text-lg font-semibold text-green-400 font-mono mb-2">
-            Search Available Cars
-          </h3>
-          <p class="text-green-300 font-mono">Look for inactive reservations</p>
-        </a>
-        <a
-          href="add_cars.html"
-          class="bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition"
-        >
-          <h3 class="text-lg font-semibold text-green-400 font-mono mb-2">
-            Add Cars
-          </h3>
-          <p class="text-green-300 font-mono">
-            Expand your inventory by adding new vehicles to the system
-          </p>
-        </a>
-        <a
-          href="advanced_search_admin.html"
-          class="bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition"
-        >
-          <h3 class="text-lg font-semibold text-green-400 font-mono mb-2">
-            Advanced Search
-          </h3>
-          <p class="text-green-300 font-mono">
-            Search for cars using reservation date, car id or customer id
-          </p>
-        </a>
-
-        <a
-          href="print_reports.html"
-          class="bg-gray-800 shadow-md rounded-lg p-4 hover:shadow-lg transition"
-        >
-          <h3 class="text-lg font-semibold text-green-400 font-mono mb-2">
-            Print Reports
-          </h3>
-          <p class="text-green-300 font-mono">
-            Generate detailed reports to track performance and activities
-          </p>
-        </a>
+      <!-- Car ID -->
+      <div class="w-full sm:w-auto flex-1">
+        <label for="car_id" class="block text-sm font-medium">Car ID</label>
+        <input
+          id="car_id"
+          name="car_id"
+          type="text"
+          placeholder="Enter Car ID"
+          class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+        />
+        <small class="italic text-gray-500">Optional</small>
       </div>
-    </main>
 
+      <!-- Customer ID -->
+      <div class="w-full sm:w-auto flex-1">
+        <label for="customer_id" class="block text-sm font-medium"
+          >Customer ID</label
+        >
+        <input
+          id="customer_id"
+          name="customer_id"
+          type="text"
+          placeholder="Enter Customer ID"
+          class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+        />
+        <small class="italic text-gray-500">Optional</small>
+      </div>
+
+      <!-- Search Button -->
+      <div class="w-full flex justify-center items-center mt-6">
+        <button
+          type="submit"
+          class="bg-green-500 hover:bg-green-600 ease-in duration-100 text-black font-medium py-2 px-6 rounded-md focus:outline-none"
+        >
+          Search
+        </button>
+      </div>
+
+      <script>
+        // Initialize Flatpickr for Reservation Date
+        flatpickr("#reservation_date", {
+          dateFormat: "Y-m-d", // Enforce YYYY-MM-DD format
+          defaultDate: "today", // Set today's date as default
+        });
+      </script>
+    </form>
     <!-- Footer -->
     <footer class="bg-gray-900 border-t border-gray-700">
       <div class="container mx-auto py-10 px-4 md:px-8">
