@@ -44,7 +44,6 @@ try {
         WHERE o.location LIKE :office_location
         -- Get cars that are not reserved in the specified time period
         AND r.car_id IS NULL
-        AND c.status = 'active'
     ";
 
     // Optional conditions array
@@ -107,81 +106,52 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Reservation Results</title>
-    <style>
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        button {
-            padding: 6px 12px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .back-button {
-            display: block;
-            margin: 20px auto;
-            width: fit-content;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1 style="text-align: center;">Available Cars for Reservation</h1>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto my-10 px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">Available Cars for Reservation</h1>
 
-    <?php if (!empty($cars)): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>No of Seats</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($cars as $car): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($car['make']); ?></td>
-                        <td><?php echo htmlspecialchars($car['model']); ?></td>
-                        <td><?php echo htmlspecialchars($car['year']); ?></td>
-                        <td><?php echo htmlspecialchars($car['no_of_seats']); ?></td>
-                        <td>
-                            <form method="POST" action="rent.php">
-                                <!-- Pass car_id, pickup_date, and return_date -->
-                                <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($car['car_id']); ?>">
-                                <input type="hidden" name="pickup_date" value="<?php echo htmlspecialchars($pick_up_date); ?>">
-                                <input type="hidden" name="return_date" value="<?php echo htmlspecialchars($return_date); ?>">
-                                <button type="submit">Reserve</button>
-                            </form>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p style="text-align: center;">No available cars found for the specified filters.</p>
-    <?php endif; ?>
+        <?php if (!empty($cars)): ?>
+            <div class="bg-white shadow-lg rounded-lg p-6">
+                <table class="w-full table-auto border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-600 text-white">
+                            <th class="border border-gray-300 px-4 py-2">Make</th>
+                            <th class="border border-gray-300 px-4 py-2">Model</th>
+                            <th class="border border-gray-300 px-4 py-2">Year</th>
+                            <th class="border border-gray-300 px-4 py-2">No of Seats</th>
+                            <th class="border border-gray-300 px-4 py-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($cars as $car): ?>
+                            <tr class="hover:bg-gray-100">
+                                <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($car['make']); ?></td>
+                                <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($car['model']); ?></td>
+                                <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($car['year']); ?></td>
+                                <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($car['no_of_seats']); ?></td>
+                                <td class="border border-gray-300 px-4 py-2 text-center">
+                                    <form method="POST" action="rent.php">
+                                        <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($car['car_id']); ?>">
+                                        <input type="hidden" name="pickup_date" value="<?php echo htmlspecialchars($pick_up_date); ?>">
+                                        <input type="hidden" name="return_date" value="<?php echo htmlspecialchars($return_date); ?>">
+                                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-4 rounded-md">Reserve</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <p class="text-center text-lg mt-6 text-gray-600">No available cars found for the specified filters.</p>
+        <?php endif; ?>
 
-    <!-- Back Button -->
-    <button class="back-button" onclick="window.history.back();">Back</button>
+        <!-- Back Button -->
+        <div class="flex justify-center mt-6">
+            <button onclick="window.history.back();" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-6 rounded-md">Back</button>
+        </div>
+    </div>
 </body>
 </html>

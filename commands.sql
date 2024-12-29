@@ -35,8 +35,10 @@ CREATE TABLE car (
     status VARCHAR(50) NOT NULL,
     office_id INT NULL,
     day_rate DECIMAL(10, 2) NOT NULL,
+    last_update_date DATE DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_car_status CHECK (status IN ('Active', 'Out of Service', 'Rented'))
 );
+
 
 -- Create reservation table
 CREATE TABLE reservation (
@@ -81,26 +83,32 @@ INSERT INTO `user` (user_id, first_name, last_name, email, phone_number, address
 
 
 INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, office_id, day_rate) VALUES
-(1, 'Toyota', 'Corolla', 5, 2021, 'ABC123', 'Active', 1, 45.00),
-(2, 'Toyota', 'Camry', 5, 2022, 'XYZ789', 'Active', 1, 50.00),
-(3, 'Ford', 'Focus', 5, 2021, 'LMN456', 'Rented', 2, 48.00),
-(4, 'Ford', 'Explorer', 7, 2023, 'DEF789', 'Out of Service', 3, 85.00),
-(5, 'Tesla', 'Model 3', 5, 2023, 'TES123', 'Active', 4, 90.00),
-(6, 'Tesla', 'Model Y', 7, 2022, 'GHJ567', 'Rented', 4, 100.00),
-(7, 'Hyundai', 'Sonata', 5, 2020, 'JKL890', 'Out of Service', 5, 55.00),
-(8, 'Hyundai', 'Elantra', 5, 2021, 'MNO123', 'Active', 5, 50.00),
-(9, 'Nissan', 'Altima', 5, 2022, 'PQR456', 'Rented', 6, 60.00),
-(10, 'Nissan', 'Sentra', 5, 2020, 'STU789', 'Active', 6, 55.00),
-(11, 'Volkswagen', 'Passat', 5, 2021, 'VWX456', 'Active', 7, 65.00),
-(12, 'Volkswagen', 'Jetta', 5, 2019, 'YZA123', 'Out of Service', 7, 60.00),
-(13, 'Jeep', 'Wrangler', 5, 2022, 'BCD789', 'Rented', 8, 75.00),
-(14, 'Jeep', 'Cherokee', 5, 2023, 'EFG456', 'Active', 8, 70.00),
-(15, 'Mercedes-Benz', 'C-Class', 5, 2023, 'HIJ123', 'Active', 9, 95.00),
-(16, 'Mercedes-Benz', 'E-Class', 5, 2022, 'KLM789', 'Active', 9, 100.00),
-(17, 'Toyota', 'Highlander', 7, 2022, 'NOP456', 'Rented', 10, 85.00),
-(18, 'Toyota', 'RAV4', 5, 2023, 'QRS789', 'Active', 10, 75.00),
-(19, 'Tesla', 'Model X', 7, 2023, 'TUV123', 'Active', 1, 120.00),
-(20, 'Ford', 'Mustang', 4, 2021, 'UVW456', 'Active', 2, 90.00);
+-- Toyota
+(1, 'Toyota', 'Corolla', 5, 2021, 'TOY123', 'Active', 1, 45.00),
+(2, 'Toyota', 'Camry', 7, 2022, 'TOY124', 'Active', 2, 55.00),
+(3, 'Toyota', 'Supra', 2, 2023, 'TOY125', 'Rented', 3, 100.00),
+(4, 'Toyota', 'Sienna', 8, 2020, 'TOY126', 'Out of Service', 4, 85.00),
+
+-- Honda
+(5, 'Honda', 'Civic', 4, 2022, 'HON123', 'Active', 5, 50.00),
+(6, 'Honda', 'Accord', 5, 2021, 'HON124', 'Rented', 6, 60.00),
+(7, 'Honda', 'Odyssey', 8, 2023, 'HON125', 'Active', 7, 75.00),
+
+-- Ford
+(8, 'Ford', 'Focus', 4, 2020, 'FOR123', 'Out of Service', 8, 48.00),
+(9, 'Ford', 'Explorer', 7, 2023, 'FOR124', 'Rented', 9, 85.00),
+(10, 'Ford', 'Mustang', 2, 2021, 'FOR125', 'Active', 10, 90.00),
+
+-- BMW
+(11, 'BMW', 'X3', 5, 2022, 'BMW123', 'Active', 1, 100.00),
+(12, 'BMW', 'X5', 6, 2023, 'BMW124', 'Rented', 2, 120.00),
+
+-- Mercedes
+(13, 'Mercedes', 'C-Class', 4, 2021, 'MER123', 'Active', 3, 90.00),
+(14, 'Mercedes', 'E-Class', 5, 2022, 'MER124', 'Active', 4, 110.00),
+(15, 'Mercedes', 'Sprinter', 8, 2023, 'MER125', 'Out of Service', 5, 130.00);
+
+
 
 
 INSERT INTO reservation (reservation_id, user_id, car_id, reservation_date, pickup_date, return_date, total_amount) VALUES
@@ -113,7 +121,28 @@ INSERT INTO reservation (reservation_id, user_id, car_id, reservation_date, pick
 (7, 7, 9, '2024-12-07', '2024-12-08', '2024-12-15', 420.0),
 (8, 8, 10, '2024-12-08', '2024-12-09', '2024-12-16', 560.0),
 (9, 9, 11, '2024-12-09', '2024-12-10', '2024-12-17', 455.0),
-(10, 10, 12, '2024-12-10', '2024-12-11', '2024-12-18', 490.0);
+(10, 10, 12, '2024-12-10', '2024-12-11', '2024-12-18', 490.0),
+(11, 1, 2, '2024-12-01', '2024-12-12', '2024-12-16', 250.0),
+(12, 1, 3, '2024-12-01', '2024-12-20', '2024-12-25', 300.0),
+(13, 2, 4, '2024-12-02', '2024-12-10', '2024-12-12', 170.0),
+(14, 2, 5, '2024-12-02', '2024-12-15', '2024-12-20', 450.0),
+(15, 3, 6, '2024-12-03', '2024-12-18', '2024-12-22', 500.0),
+(16, 4, 1, '2024-12-01', '2024-12-10', '2024-12-15', 300.0),
+(17, 5, 2, '2024-12-01', '2024-12-10', '2024-12-12', 220.0),
+(18, 6, 3, '2024-12-01', '2024-12-12', '2024-12-16', 260.0),
+(19, 7, 1, '2024-12-03', '2024-12-15', '2024-12-20', 340.0),
+(20, 8, 1, '2024-12-04', '2024-12-18', '2024-12-25', 400.0),
+(21, 9, 2, '2024-12-05', '2024-12-20', '2024-12-24', 450.0),
+(22, 10, 3, '2024-12-06', '2024-12-08', '2024-12-15', 180.0),
+(23, 11, 4, '2024-12-06', '2024-12-10', '2024-12-20', 300.0),
+(24, 12, 4, '2024-12-06', '2024-12-12', '2024-12-18', 350.0),
+(25, 1, 7, '2024-12-01', '2024-12-15', '2024-12-20', 400.0),
+(26, 2, 8, '2024-12-02', '2024-12-12', '2024-12-18', 500.0),
+(27, 3, 9, '2024-12-03', '2024-12-20', '2024-12-25', 300.0),
+(28, 4, 10, '2024-12-04', '2024-12-10', '2024-12-15', 600.0),
+(29, 5, 11, '2024-12-05', '2024-12-18', '2024-12-22', 450.0),
+(30, 6, 12, '2024-12-06', '2024-12-20', '2024-12-25', 550.0);
+
 
 
 

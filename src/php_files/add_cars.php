@@ -33,9 +33,13 @@ try {
         throw new Exception("Number of seats must be a positive integer.");
     }
 
+    if (!is_numeric($office_id) || $office_id <= 0) {
+        throw new Exception("Office ID must be a valid positive integer.");
+    }
+
     // Prepare the SQL query
-    $query = "INSERT INTO car (car_id, plate_number, office_id, day_rate, `status`, make, model, `year`, no_of_seats)
-              VALUES (:car_id, :plate_num, :office_id, :day_rate, :status, :make, :model, :year, :no_of_seats)";
+    $query = "INSERT INTO car (plate_number, office_id, day_rate, `status`, make, model, `year`, no_of_seats)
+              VALUES (:plate_num, :office_id, :day_rate, :status, :make, :model, :year, :no_of_seats)";
 
     $params = [
         ':plate_num' => $plate_num,

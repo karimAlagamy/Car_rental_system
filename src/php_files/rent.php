@@ -60,38 +60,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation Details</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1, h2, p { text-align: center; }
-        .container { max-width: 600px; margin: 0 auto; text-align: center; }
-        button, form { margin-top: 10px; }
-        button { padding: 8px 16px; cursor: pointer; border: none; color: #fff; }
-        .rent-btn { background-color: green; }
-        .back-btn { background-color: gray; }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-
-            <h1>Reservation Details</h1>
-            <!-- <p>Car ID: <?php echo htmlspecialchars($car_id); ?></p>  -->
-            <p>Pick-up Date: <?php echo htmlspecialchars($pickup_date); ?></p>
-            <p>Return Date: <?php echo htmlspecialchars($return_date); ?></p>
-            <p>Total Rental Days: <?php echo htmlspecialchars($rental_days); ?></p>
-            <p>Day Rate: <?php echo htmlspecialchars($day_rate); ?></p>
-            <h2>Total Rent: <?php echo htmlspecialchars($total_rent); ?></h2>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto my-10 px-6 lg:px-8">
+        <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-300">
+            <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">Reservation Details</h1>
+            
+            <div class="text-center mb-6">
+                <!-- Reservation Details -->
+                <p class="text-lg">Pick-up Date: <span class="font-bold"><?php echo htmlspecialchars($pickup_date); ?></span></p>
+                <p class="text-lg">Return Date: <span class="font-bold"><?php echo htmlspecialchars($return_date); ?></span></p>
+                <p class="text-lg">Total Rental Days: <span class="font-bold"><?php echo htmlspecialchars($rental_days); ?></span></p>
+                <p class="text-lg">Day Rate: <span class="font-bold">$<?php echo htmlspecialchars($day_rate); ?></span></p>
+                <h2 class="text-xl font-bold mt-4">Total Rent: <span class="text-blue-600">$<?php echo htmlspecialchars($total_rent); ?></span></h2>
+            </div>
 
             <!-- Rent Form -->
-            <form method="POST" action="confirm_rent.php">
+            <form method="POST" action="confirm_rent.php" class="text-center">
                 <input type="hidden" name="car_id" value="<?php echo htmlspecialchars($car_id); ?>">
                 <input type="hidden" name="pickup_date" value="<?php echo htmlspecialchars($pickup_date); ?>">
                 <input type="hidden" name="return_date" value="<?php echo htmlspecialchars($return_date); ?>">
                 <input type="hidden" name="total_rent" value="<?php echo htmlspecialchars($total_rent); ?>">
-                <button type="submit" class="rent-btn">Confirm Rent</button>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-md">Confirm Rent</button>
             </form>
 
             <!-- Back Button -->
-            <button onclick="window.history.back();" class="back-btn">Back</button>
+            <div class="text-center mt-4">
+                <button onclick="window.history.back();" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-6 rounded-md">Back</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

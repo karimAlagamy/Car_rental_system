@@ -113,7 +113,12 @@
     <main class="container mx-auto my-10 px-6 lg:px-8">
       <div class="bg-gray-800 shadow-lg rounded-lg p-6">
         <h1 class="text-2xl font-bold text-green-400 mb-6">Generate Reports</h1>
-        <form id="report-form" class="flex flex-wrap gap-6">
+        <form
+          id="report-form"
+          method="POST"
+          action="php_files/print_reports.php"
+          class="flex flex-wrap gap-6"
+        >
           <!-- Report Type -->
           <div class="w-full">
             <label
@@ -186,10 +191,6 @@
             </button>
           </div>
         </form>
-
-        <div id="report-output" class="mt-6 text-green-400">
-          <!-- Reports will be rendered here -->
-        </div>
       </div>
     </main>
 
@@ -210,46 +211,64 @@
           const selectedReport = this.value;
           const additionalFilters =
             document.getElementById("additional-filters");
+          const startDateField =
+            document.getElementById("start-date").parentElement;
+          const endDateField =
+            document.getElementById("end-date").parentElement;
 
-          additionalFilters.innerHTML = ""; // Clear previous filters
+          // Clear previous filters
+          additionalFilters.innerHTML = "";
 
+          // Show/Hide start and end date based on the report type
+          if (
+            selectedReport === "car-status" ||
+            selectedReport === "customer-reservations"
+          ) {
+            startDateField.classList.add("hidden");
+            endDateField.classList.add("hidden");
+          } else {
+            startDateField.classList.remove("hidden");
+            endDateField.classList.remove("hidden");
+          }
+
+          // Add additional filters for specific report types
           if (selectedReport === "reservations-car") {
             additionalFilters.innerHTML = `
-            <label for="car-id" class="block text-sm font-medium text-green-300">
-              Car ID
-            </label>
-            <input
-              id="car-id"
-              name="car-id"
-              type="text"
-              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
-            />
-          `;
+              <label for="car-id" class="block text-sm font-medium text-green-300">
+                Car ID
+              </label>
+              <input
+                id="car-id"
+                name="car-id"
+                type="text"
+                class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+              />
+            `;
           } else if (selectedReport === "car-status") {
             additionalFilters.innerHTML = `
-            <label for="specific-date" class="block text-sm font-medium text-green-300">
-              Date
-            </label>
-            <input
-              id="specific-date"
-              name="specific-date"
-              type="text"
-              placeholder="YYYY-MM-DD"
-              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
-            />
-          `;
+              <label for="specific-date" class="block text-sm font-medium text-green-300">
+                Date
+              </label>
+              <input
+                id="specific-date"
+                name="specific-date"
+                type="text"
+                placeholder="YYYY-MM-DD"
+                class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+              />
+            `;
           } else if (selectedReport === "customer-reservations") {
             additionalFilters.innerHTML = `
-            <label for="customer-id" class="block text-sm font-medium text-green-300">
-              Customer ID
-            </label>
-            <input
-              id="customer-id"
-              name="customer-id"
-              type="text"
-              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
-            />
-          `;
+              <label for="customer-id" class="block text-sm font-medium text-green-300">
+                Customer ID
+              </label>
+              <input
+                id="customer-id"
+                name="customer-id"
+                type="text"
+                class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+              />
+            `;
           }
         });
     </script>
