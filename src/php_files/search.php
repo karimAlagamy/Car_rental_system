@@ -7,7 +7,7 @@ $conn = getDatabaseConnection();
 
 try {
     // Retrieve user input
-    $office_location = '%' . $_POST['location'] . '%' ?? null; // Add % for LIKE partial match
+    $office_location = '%' . ($_POST['location'] ?? '') . '%'; // Add % for LIKE partial match
     $pick_up_date = $_POST['pickup_date'] ?? null;
     $return_date = $_POST['return_date'] ?? null;
 
@@ -21,15 +21,26 @@ try {
         die("Error: Location, pick-up date, and return date are required.");
     }
 
+    $current_date = new DateTime();
     $pickup_date_obj = new DateTime($pick_up_date);
     $return_date_obj = new DateTime($return_date);
 
-    // Check if return date is greater than pick-up date
+    // Check if the pick-up date is greater than today
+    if ($pickup_date_obj < $current_date) {
+        echo "<script>
+            alert('Pick-up date must after today.');
+            window.history.back();
+        </script>";
+        exit;
+    }
+
+    // Check if the return date is greater than pick-up date
     if ($return_date_obj <= $pickup_date_obj) {
         echo "<script>
             alert('Return date must be after the pick-up date.');
             window.history.back();
         </script>";
+        exit;
     }
 
     // Start with the base query

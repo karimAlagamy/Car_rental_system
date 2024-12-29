@@ -81,7 +81,6 @@ INSERT INTO `user` (user_id, first_name, last_name, email, phone_number, address
 (12, 'Admin', 'Brown', 'adminbrown@example.com', '7776665555', 'Admin Plaza, Technology Park', 'adminbrown', 'adminsecure', 'A'),
 (13, 'Ethan', 'Harris', 'ethanh@example.com', '5554443332', 'Admin Office, Downtown City Center', 'ethanh', 'ethanpass', 'A');
 
-
 INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, office_id, day_rate) VALUES
 -- Toyota
 (1, 'Toyota', 'Corolla', 5, 2021, 'TOY123', 'Active', 1, 45.00),
@@ -108,7 +107,40 @@ INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, o
 (14, 'Mercedes', 'E-Class', 5, 2022, 'MER124', 'Active', 4, 110.00),
 (15, 'Mercedes', 'Sprinter', 8, 2023, 'MER125', 'Out of Service', 5, 130.00);
 
+INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, office_id, day_rate) VALUES
+(16, 'Toyota', 'Corolla', 5, 2023, 'TOY016', 'Active', 1, 50.00),
+(17, 'Honda', 'Civic', 4, 2023, 'HON017', 'Active', 1, 60.00),
+(18, 'Ford', 'Focus', 4, 2023, 'FOR018', 'Active', 1, 65.00),
+(19, 'BMW', 'X3', 5, 2023, 'BMW019', 'Active', 1, 75.00),
+(20, 'Mercedes', 'C-Class', 4, 2023, 'MER020', 'Active', 1, 80.00);
 
+INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, office_id, day_rate) VALUES
+(21, 'Toyota', 'Camry', 7, 2023, 'TOY021', 'Active', 2, 55.00),
+(22, 'Honda', 'Accord', 5, 2023, 'HON022', 'Active', 2, 65.00),
+(23, 'Ford', 'Escape', 5, 2023, 'FOR023', 'Active', 2, 70.00),
+(24, 'BMW', 'X5', 6, 2023, 'BMW024', 'Active', 2, 90.00),
+(25, 'Mercedes', 'E-Class', 5, 2023, 'MER025', 'Active', 2, 95.00);
+
+INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, office_id, day_rate) VALUES
+(26, 'Toyota', 'Supra', 2, 2023, 'TOY026', 'Active', 3, 100.00),
+(27, 'Honda', 'Odyssey', 8, 2023, 'HON027', 'Active', 3, 75.00),
+(28, 'Ford', 'Explorer', 7, 2023, 'FOR028', 'Active', 3, 85.00),
+(29, 'BMW', '4 Series', 4, 2023, 'BMW029', 'Active', 3, 110.00),
+(30, 'Mercedes', 'C-Class', 4, 2023, 'MER030', 'Active', 3, 115.00);
+
+INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, office_id, day_rate) VALUES
+(31, 'Toyota', 'Sienna', 8, 2023, 'TOY031', 'Active', 4, 85.00),
+(32, 'Honda', 'Accord', 5, 2023, 'HON032', 'Active', 4, 60.00),
+(33, 'Ford', 'Focus', 4, 2023, 'FOR033', 'Active', 4, 65.00),
+(34, 'BMW', 'X3', 5, 2023, 'BMW034', 'Active', 4, 100.00),
+(35, 'Mercedes', 'E-Class', 5, 2023, 'MER035', 'Active', 4, 110.00);
+
+INSERT INTO car (car_id, make, model, no_of_seats, year, plate_number, status, office_id, day_rate) VALUES
+(36, 'Toyota', 'Corolla', 5, 2023, 'TOY036', 'Active', 5, 50.00),
+(37, 'Honda', 'Civic', 4, 2023, 'HON037', 'Active', 5, 60.00),
+(38, 'Ford', 'Focus', 4, 2023, 'FOR038', 'Active', 5, 65.00),
+(39, 'BMW', 'X3', 5, 2023, 'BMW039', 'Active', 5, 100.00),
+(40, 'Mercedes', 'Sprinter', 8, 2023, 'MER040', 'Active', 5, 130.00);
 
 
 INSERT INTO reservation (reservation_id, user_id, car_id, reservation_date, pickup_date, return_date, total_amount) VALUES
