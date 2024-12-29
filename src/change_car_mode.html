@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change Car Mode</title>
+    <link href="/Car_rental_system/dist/styles.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-900 text-gray-800">
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-md">
+      <nav
+        class="container mx-auto flex items-center justify-between p-4 lg:px-8"
+        aria-label="Global"
+      >
+        <!-- Logo -->
+        <div
+          class="flex items-center text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+        >
+          <a href="#">Admin - Change Car Mode</a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden lg:flex lg:gap-x-8">
+          <a
+            href="add-cars.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Add Cars</a
+          >
+          <a
+            href="delete-cars.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Delete Cars</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+        </div>
+
+        <!-- Logout -->
+        <div class="hidden lg:flex">
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-green-400" id="mobile-menu-button">
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="hidden lg:hidden bg-gray-800" id="mobile-menu">
+        <nav class="flex flex-col items-start p-4 space-y-4">
+          <a
+            href="add-cars.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Add Cars</a
+          >
+          <a
+            href="delete-cars.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Delete Cars</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+    <!-- Change Car Mode Form -->
+    <form
+      id="change-car-mode-form"
+      action="php_files/change_car_mode.php"
+      method="POST"
+      class="bg-gray-800 shadow-lg rounded-lg p-6 mx-auto my-10 flex flex-wrap gap-6 max-w-7xl place-content-center text-green-400"
+    >
+      <!-- Row 1: Identification Fields -->
+      <div class="w-full flex flex-wrap gap-6 mt-4">
+        <!-- Car ID -->
+        <div class="flex-1">
+          <label for="car_id" class="block text-sm font-medium"> Car ID </label>
+          <input
+            id="car_id"
+            name="car_id"
+            type="text"
+            placeholder="Enter Car ID"
+            class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          />
+        </div>
+
+        <!-- Plate Number -->
+        <div class="flex-1">
+          <label for="plate_number" class="block text-sm font-medium">
+            Plate Number
+          </label>
+          <input
+            id="plate_number"
+            name="plate_number"
+            type="text"
+            placeholder="Enter Plate Number"
+            class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          />
+        </div>
+      </div>
+
+      <!-- Row 2: Status Field -->
+      <div class="w-full flex flex-wrap gap-6 mt-4">
+        <div class="flex-1">
+          <label for="status" class="block text-sm font-medium">
+            New Status
+          </label>
+          <select
+            id="status"
+            name="status"
+            class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500 mt-1"
+          >
+            <option value="" disabled selected>Select New Status</option>
+            <option value="Active">Active</option>
+            <option value="Out of Service">Out of Service</option>
+            <option value="Rented">Rented</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="w-full flex justify-center items-center mt-6">
+        <button
+          type="submit"
+          class="bg-green-500 hover:bg-green-600 ease-in duration-100 text-black font-medium py-2 px-6 rounded-md focus:outline-none"
+        >
+          Update Mode
+        </button>
+      </div>
+    </form>
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700">
+      <div class="container mx-auto py-10 px-4 md:px-8">
+        <div
+          class="mt-10 border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-green-300 font-mono"
+        >
+          <p>&copy; 2024 Sawa2na Aktar, Inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
