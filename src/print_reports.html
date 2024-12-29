@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Reports</title>
+    <link href="/Car_rental_system/dist/styles.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-900 text-gray-800">
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-md">
+      <nav
+        class="container mx-auto flex items-center justify-between p-4 lg:px-8"
+        aria-label="Global"
+      >
+        <!-- Logo -->
+        <div
+          class="flex items-center text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+        >
+          <a href="admin.html">Admin</a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden lg:flex lg:gap-x-8">
+          <a
+            href="search.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Search Cars</a
+          >
+          <a
+            href="reservation-history.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Reservations</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+        </div>
+
+        <!-- Logout -->
+        <div class="hidden lg:flex">
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-green-400" id="mobile-menu-button">
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="hidden lg:hidden bg-gray-800" id="mobile-menu">
+        <nav class="flex flex-col items-start p-4 space-y-4">
+          <a
+            href="search.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Search Cars</a
+          >
+          <a
+            href="reservation-history.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Reservations</a
+          >
+          <a
+            href="profile.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+            >Profile</a
+          >
+          <a
+            href="login.html"
+            class="text-sm font-semibold text-green-400 hover:text-green-300 font-mono"
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      // Mobile menu toggle
+      const menuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+
+    <!-- Reports Form -->
+    <main class="container mx-auto my-10 px-6 lg:px-8">
+      <div class="bg-gray-800 shadow-lg rounded-lg p-6">
+        <h1 class="text-2xl font-bold text-green-400 mb-6">Generate Reports</h1>
+        <form id="report-form" class="flex flex-wrap gap-6">
+          <!-- Report Type -->
+          <div class="w-full">
+            <label
+              for="report-type"
+              class="block text-sm font-medium text-green-300"
+            >
+              Select Report Type
+            </label>
+            <select
+              id="report-type"
+              name="report-type"
+              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+            >
+              <option value="reservations-period">
+                Reservations (All Cars)
+              </option>
+              <option value="reservations-car">
+                Reservations (Specific Car)
+              </option>
+              <option value="car-status">Car Status</option>
+              <option value="customer-reservations">
+                Customer Reservations
+              </option>
+              <option value="daily-payments">Daily Payments</option>
+            </select>
+          </div>
+
+          <!-- Date Filters -->
+          <div class="w-full sm:w-1/2">
+            <label
+              for="start-date"
+              class="block text-sm font-medium text-green-300"
+            >
+              Start Date
+            </label>
+            <input
+              id="start-date"
+              name="start-date"
+              type="date"
+              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+          <div class="w-full sm:w-1/2">
+            <label
+              for="end-date"
+              class="block text-sm font-medium text-green-300"
+            >
+              End Date
+            </label>
+            <input
+              id="end-date"
+              name="end-date"
+              type="date"
+              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+
+          <!-- Dynamic Filters -->
+          <div id="additional-filters" class="w-full"></div>
+
+          <!-- Submit Button -->
+          <div class="w-full flex justify-center">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-600 text-black font-medium py-2 px-6 rounded-md"
+            >
+              Generate Report
+            </button>
+          </div>
+        </form>
+
+        <div id="report-output" class="mt-6 text-green-400">
+          <!-- Reports will be rendered here -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700">
+      <div
+        class="container mx-auto py-10 px-4 md:px-8 text-center text-sm text-green-300"
+      >
+        &copy; 2024 Sawa2na Aktar, Inc. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // Dynamic Filters
+      document
+        .getElementById("report-type")
+        .addEventListener("change", function () {
+          const selectedReport = this.value;
+          const additionalFilters =
+            document.getElementById("additional-filters");
+
+          additionalFilters.innerHTML = ""; // Clear previous filters
+
+          if (selectedReport === "reservations-car") {
+            additionalFilters.innerHTML = `
+            <label for="car-id" class="block text-sm font-medium text-green-300">
+              Car ID
+            </label>
+            <input
+              id="car-id"
+              name="car-id"
+              type="text"
+              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+            />
+          `;
+          } else if (selectedReport === "car-status") {
+            additionalFilters.innerHTML = `
+            <label for="specific-date" class="block text-sm font-medium text-green-300">
+              Date
+            </label>
+            <input
+              id="specific-date"
+              name="specific-date"
+              type="date"
+              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+            />
+          `;
+          } else if (selectedReport === "customer-reservations") {
+            additionalFilters.innerHTML = `
+            <label for="customer-id" class="block text-sm font-medium text-green-300">
+              Customer ID
+            </label>
+            <input
+              id="customer-id"
+              name="customer-id"
+              type="text"
+              class="w-full bg-black border border-gray-700 text-green-400 rounded-md py-2 px-4 focus:ring-green-500 focus:border-green-500"
+            />
+          `;
+          }
+        });
+    </script>
+  </body>
+</html>
